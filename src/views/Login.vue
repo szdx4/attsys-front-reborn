@@ -111,9 +111,7 @@ export default {
   methods: {
     checkCapslock ({ shiftKey, key } = {}) {
       if (key && key.length === 1) {
-        if (shiftKey && (key >= 'a' && key <= 'z')) {
-          this.capsTooltip = true
-        } else if (!shiftKey && (key >= 'A' && key <= 'Z')) {
+        if (!shiftKey && (key >= 'A' && key <= 'Z')) {
           this.capsTooltip = true
         } else {
           this.capsTooltip = false
