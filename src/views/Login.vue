@@ -9,14 +9,14 @@
       :rules="loginRules"
     >
       <div class="title-container">
-        <h3 class="title">Login</h3>
+        <h3 class="title">登录</h3>
       </div>
 
       <el-form-item prop="username">
         <el-input
           ref="username"
           v-model="loginForm.username"
-          placeholder="Username"
+          placeholder="用户名"
           name="username"
           type="text"
           tabindex="1"
@@ -26,7 +26,7 @@
 
       <el-tooltip
         v-model="capsTooltip"
-        content="Caps lock is On"
+        content="大写锁定开"
         placement="right"
         manual
       >
@@ -34,7 +34,7 @@
           <el-input
             ref="password"
             v-model="loginForm.password"
-            placeholder="Password"
+            placeholder="密码"
             name="password"
             :type="passwordType"
             tabindex="2"
@@ -54,7 +54,7 @@
         type="primary"
         style="width:100%;"
         @click.native.prevent="handleLogin"
-        >Login</el-button
+        >登录</el-button
       >
     </el-form>
   </div>
