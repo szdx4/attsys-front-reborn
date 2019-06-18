@@ -110,6 +110,7 @@ export default {
     background-color: #fcfaf2;
 
     .content-container {
+      width: 100%;
       padding: 20px;
 
       .breadcrumb-container {
@@ -121,6 +122,7 @@ export default {
       .content-wrapper {
         margin-top: 5px;
         margin-left: 5px;
+        width: 100%;
       }
     }
   }

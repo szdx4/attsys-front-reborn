@@ -107,7 +107,7 @@ export default {
   },
   created () {
     if (isLogin()) {
-      this.$router.push({ path: '/' })
+      this.$router.push({ path: '/home' })
     }
 
     document.title = '登录'
