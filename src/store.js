@@ -31,6 +31,7 @@ const mutations = {
   },
   setUser: (state, user, expiredAt) => {
     state.user.id = user.id
+    state.user.name = user.name
     state.user.role = user.role
     state.user.department = user.departmentId
     state.expired_at = expiredAt

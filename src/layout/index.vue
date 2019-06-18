@@ -2,11 +2,11 @@
   <el-row class="app-wrapper">
     <el-col :span="24" class="header">
       <el-col :span="20" class="logo">
-        test
+        员工考勤系统
       </el-col>
       <el-col :span="4" class="userinfo">
         <el-dropdown trigger="hover">
-          <span class="el-dropdown-link username">test</span>
+          <span class="el-dropdown-link username">{{ user.name }}</span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>我的信息</el-dropdown-item>
             <el-dropdown-item divided @click.native="logout"
@@ -58,6 +58,11 @@ export default {
       localStorage.setItem('token', '')
       this.$router.push({ path: '/login' })
       this.$router.go(0)
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.getters.user
     }
   },
   created () {
