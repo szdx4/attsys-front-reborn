@@ -109,6 +109,8 @@ export default {
     if (isLogin()) {
       this.$router.push({ path: '/' })
     }
+
+    document.title = '登录'
   },
   destroyed () {
     //
