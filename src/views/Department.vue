@@ -89,6 +89,7 @@ import {
   departmentCreate,
   departmentSave
 } from '@/requests/department'
+import { isMaster } from '@/utils/user'
 
 export default {
   name: 'department',
@@ -126,6 +127,10 @@ export default {
     }
   },
   mounted () {
+    if (!isMaster()) {
+      this.$router.push({ path: '/home' })
+    }
+
     this.loadDepartments()
   },
   methods: {
