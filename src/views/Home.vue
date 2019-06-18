@@ -1,24 +1,12 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <p>test</p>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-import { isLogin } from '@/utils/user'
-
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  },
-  mounted () {
-    if (!isLogin()) {
-      this.$router.push({ path: '/login' })
-    }
-  }
+  name: 'home'
 }
 </script>
+
+<style lang="scss">
+</style>

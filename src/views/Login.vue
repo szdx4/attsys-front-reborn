@@ -62,7 +62,7 @@
 
 <script>
 import { isLogin } from '@/utils/user'
-import { userAuth } from '@/requests/user'
+import { userAuth, userShow } from '@/requests/user'
 
 export default {
   name: 'login',
@@ -106,16 +106,14 @@ export default {
     }
   },
   created () {
-    //
+    if (isLogin()) {
+      this.$router.push({ path: '/' })
+    }
   },
   destroyed () {
     //
   },
   mounted () {
-    if (isLogin()) {
-      this.$router.push({ path: '/' })
-    }
-
     if (this.loginForm.username === '') {
       this.$refs.username.focus()
     } else if (this.loginForm.password === '') {
@@ -154,21 +152,33 @@ export default {
           let password = this.loginForm.password
 
           userAuth(username, password).then(res => {
-            this.loading = false
-
             let response = res.data
             let token = response.token
             localStorage.setItem('token', token)
+            this.$store.commit('setToken', token)
 
-            this.$notify({
-              title: '提示',
-              message: '登录成功',
-              type: 'success'
+            let tokenPreload = decodeURIComponent(escape(window.atob(token.split('.')[1])))
+            let tokenData = JSON.parse(tokenPreload)
+
+            userShow(tokenData.id).then(res => {
+              this.loading = false
+
+              let user = res.data.data
+              user.departmentId = user.department.id
+              this.$store.commit('setUser', user, tokenData.expired_at)
+
+              this.$notify({
+                title: '提示',
+                message: '登录成功',
+                type: 'success'
+              })
+              setTimeout(() => {
+                this.$router.push({ path: '/home' })
+              }, 1000)
+            }).catch(() => {
+              this.loading = false
+              location.href = '/#/home'
             })
-            setTimeout(() => {
-              this.$router.push({ path: '/' })
-              this.$router.go(0)
-            }, 1000)
           }).catch(() => {
             this.loading = false
 

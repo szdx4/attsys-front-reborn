@@ -32,7 +32,6 @@ export default {
           this.loading = false
         } else {
           userShow(tokenData.id).then(res => {
-            console.log('user login')
             let user = res.data.data
             user.departmentId = user.department.id
             this.$store.commit('setUser', user, tokenData.expired_at)
