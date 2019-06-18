@@ -1,6 +1,13 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form" autocomplete="on" label-position="left">
+    <el-form
+      class="login-form"
+      autocomplete="on"
+      label-position="left"
+      ref="loginForm"
+      :model="loginForm"
+      :rules="loginRules"
+    >
       <div class="title-container">
         <h3 class="title">Login</h3>
       </div>
@@ -54,19 +61,22 @@
 </template>
 
 <script>
+import { isLogin } from '@/utils/user'
+import { userAuth } from '@/requests/user'
+
 export default {
   name: 'login',
   data () {
     const validateUsername = (rule, value, callback) => {
-      if (value.length < 5) {
-        callback(new Error('The username can not be less than 6 letters'))
+      if (value.length < 4) {
+        callback(new Error('用户名必须大于 3 位'))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+      if (value.length < 4) {
+        callback(new Error('密码必须大于 4 位'))
       } else {
         callback()
       }
@@ -102,6 +112,10 @@ export default {
     //
   },
   mounted () {
+    if (isLogin()) {
+      this.$router.push({ path: '/' })
+    }
+
     if (this.loginForm.username === '') {
       this.$refs.username.focus()
     } else if (this.loginForm.password === '') {
@@ -132,11 +146,44 @@ export default {
       })
     },
     handleLogin () {
-      this.loading = true
-      setTimeout(() => {
-        console.log(this.loginForm.username)
-        this.loading = false
-      }, 1000)
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.loading = true
+
+          let username = this.loginForm.username
+          let password = this.loginForm.password
+
+          userAuth(username, password).then(res => {
+            this.loading = false
+
+            let response = res.data
+            let token = response.token
+            localStorage.setItem('token', token)
+
+            this.$notify({
+              title: '提示',
+              message: '登录成功',
+              type: 'success'
+            })
+            setTimeout(() => {
+              this.$router.push({ path: '/' })
+              this.$router.go(0)
+            }, 1000)
+          }).catch(() => {
+            this.loading = false
+
+            this.$notify.error({
+              title: '提示',
+              message: '用户名或密码错误'
+            })
+          })
+        } else {
+          this.$notify.warn({
+            title: '提示',
+            message: '用户名或密码格式不正确'
+          })
+        }
+      })
     }
   }
 }
