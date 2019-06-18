@@ -5,13 +5,19 @@ Vue.use(Router)
 
 const routes = [
   {
+    path: '/',
+    hidden: true,
+    roles: ['user', 'manager', 'master'],
+    redirect: '/home'
+  },
+  {
     path: '/login',
     hidden: true,
     roles: ['user', 'manager', 'master'],
     component: () => import('@/views/Login.vue')
   },
   {
-    path: '/',
+    path: '/1',
     name: '控制台',
     icon: 'el-icon-s-platform',
     hidden: false,
@@ -29,13 +35,22 @@ const routes = [
     ]
   },
   {
-    path: '/test',
-    name: '测试',
-    icon: 'el-icon-view',
+    path: '/2',
+    name: '部门',
+    icon: 'el-icon-s-cooperation',
     hidden: false,
-    roles: ['haha'],
+    roles: ['master'],
     component: () => import('@/layout'),
-    children: []
+    children: [
+      {
+        path: '/department',
+        name: '部门管理',
+        icon: 'el-icon-s-order',
+        hidden: false,
+        roles: ['master'],
+        component: () => import('@/views/Department')
+      }
+    ]
   }
 ]
 

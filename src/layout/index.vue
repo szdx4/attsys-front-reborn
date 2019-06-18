@@ -115,7 +115,8 @@ export default {
     background-color: #fcfaf2;
 
     .content-container {
-      width: 100%;
+      flex: 1;
+      overflow-y: scroll;
       padding: 20px;
 
       .breadcrumb-container {
@@ -125,9 +126,32 @@ export default {
       }
 
       .content-wrapper {
-        margin-top: 5px;
+        margin-top: 10px;
         margin-left: 5px;
         width: 100%;
+      }
+    }
+
+    .el-pagination {
+      float: right;
+      margin-top: 10px;
+    }
+
+    .toolbar {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      height: 60px;
+
+      .left {
+        float: left;
+      }
+
+      .right {
+        float: right;
+      }
+
+      .el-button {
+        margin-top: -10px;
       }
     }
   }
