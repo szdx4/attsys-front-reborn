@@ -90,7 +90,7 @@ const routes = [
         path: '/signlogs',
         name: '签到记录',
         icon: 'el-icon-tickets',
-        hidden: false,
+        hidden: true,
         roles: ['user', 'manager', 'master'],
         component: () => import('@/views/SignLogs')
       }
