@@ -34,7 +34,11 @@
           @click="departmentFormVisible = true"
           >部门排班</el-button
         >
-        <el-button size="small" type="primary" @click="allFormVisible = true"
+        <el-button
+          size="small"
+          type="primary"
+          :v-if="isMaster"
+          @click="allFormVisible = true"
           >全体排班</el-button
         >
       </div>
@@ -399,6 +403,11 @@ export default {
     }
 
     this.loadShifts()
+  },
+  computed: {
+    isMaster () {
+      return isMaster()
+    }
   },
   methods: {
     dateFormatter (row, column) {
