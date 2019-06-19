@@ -85,6 +85,14 @@ const routes = [
         hidden: false,
         roles: ['manager', 'master'],
         component: () => import('@/views/Sign')
+      },
+      {
+        path: '/signlogs',
+        name: '签到记录',
+        icon: 'el-icon-tickets',
+        hidden: false,
+        roles: ['user', 'manager', 'master'],
+        component: () => import('@/views/SignLogs')
       }
     ]
   }
