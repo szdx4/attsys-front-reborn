@@ -129,6 +129,14 @@ const routes = [
         hidden: false,
         roles: ['user'],
         component: () => import('@/views/MyShift')
+      },
+      {
+        path: '/shifts',
+        name: '排班列表',
+        icon: 'el-icon-files',
+        hidden: false,
+        roles: ['manager', 'master'],
+        component: () => import('@/views/Shift')
       }
     ]
   }
