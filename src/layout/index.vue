@@ -153,6 +153,14 @@ export default {
       .el-button {
         margin-top: -10px;
       }
+
+      .el-form {
+        margin-top: -10px;
+
+        .el-button {
+          margin-top: 4px;
+        }
+      }
     }
   }
 }

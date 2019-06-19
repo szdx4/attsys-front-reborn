@@ -95,6 +95,24 @@ const routes = [
         component: () => import('@/views/SignLogs')
       }
     ]
+  },
+  {
+    path: '/5',
+    name: '工时',
+    icon: 'el-icon-time',
+    hidden: false,
+    roles: ['user', 'manager', 'master'],
+    component: () => import('@/layout'),
+    children: [
+      {
+        path: '/hours',
+        name: '工时记录',
+        icon: 'el-icon-tickets',
+        hidden: false,
+        roles: ['user', 'manager', 'master'],
+        component: () => import('@/views/Hours')
+      }
+    ]
   }
 ]
 
