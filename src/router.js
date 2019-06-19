@@ -75,7 +75,7 @@ const routes = [
     name: '签到',
     icon: 'el-icon-check',
     hidden: false,
-    roles: ['user', 'manager', 'master'],
+    roles: ['manager', 'master'],
     component: () => import('@/layout'),
     children: [
       {

@@ -1,5 +1,5 @@
 <template>
-  <p>tesdfsdsdfsdst</p>
+  <p>这里是你的首页</p>
 </template>
 
 <script>
