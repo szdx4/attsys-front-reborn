@@ -105,7 +105,7 @@ export default {
       tableLoading: false,
       departments: {
         total: 0,
-        current_page: 0,
+        current_page: 1,
         per_page: 0,
         data: []
       },

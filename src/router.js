@@ -139,6 +139,24 @@ const routes = [
         component: () => import('@/views/Shift')
       }
     ]
+  },
+  {
+    path: '/7',
+    name: '加班',
+    icon: 'el-icon-warning',
+    hidden: false,
+    roles: ['manager', 'master'],
+    component: () => import('@/layout'),
+    children: [
+      {
+        path: '/overtime',
+        name: '加班申请列表',
+        icon: 'el-icon-files',
+        hidden: false,
+        roles: ['manager', 'master'],
+        component: () => import('@/views/Overtime')
+      }
+    ]
   }
 ]
 
