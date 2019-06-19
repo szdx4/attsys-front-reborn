@@ -262,7 +262,6 @@ export default {
           })
         }
       })
-      this.editFormVisible = false
     }
   }
 }

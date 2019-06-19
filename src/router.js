@@ -51,6 +51,24 @@ const routes = [
         component: () => import('@/views/Department')
       }
     ]
+  },
+  {
+    path: '/3',
+    name: '用户',
+    icon: 'el-icon-user-solid',
+    hidden: false,
+    roles: ['master'],
+    component: () => import('@/layout'),
+    children: [
+      {
+        path: '/user',
+        name: '用户管理',
+        icon: 'el-icon-s-order',
+        hidden: false,
+        roles: ['master'],
+        component: () => import('@/views/User')
+      }
+    ]
   }
 ]
 
