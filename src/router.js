@@ -175,6 +175,24 @@ const routes = [
         component: () => import('@/views/Leave')
       }
     ]
+  },
+  {
+    path: '/9',
+    name: '人脸',
+    icon: 'el-icon-picture-outline-round',
+    hidden: false,
+    roles: ['master'],
+    component: () => import('@/layout'),
+    children: [
+      {
+        path: '/face',
+        name: '人脸管理',
+        icon: 'el-icon-files',
+        hidden: false,
+        roles: ['master'],
+        component: () => import('@/views/Face')
+      }
+    ]
   }
 ]
 
