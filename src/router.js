@@ -157,6 +157,24 @@ const routes = [
         component: () => import('@/views/Overtime')
       }
     ]
+  },
+  {
+    path: '/8',
+    name: '请假',
+    icon: 'el-icon-help',
+    hidden: false,
+    roles: ['manager', 'master'],
+    component: () => import('@/layout'),
+    children: [
+      {
+        path: '/leave',
+        name: '请假申请列表',
+        icon: 'el-icon-files',
+        hidden: false,
+        roles: ['manager', 'master'],
+        component: () => import('@/views/Leave')
+      }
+    ]
   }
 ]
 
