@@ -113,6 +113,24 @@ const routes = [
         component: () => import('@/views/Hours')
       }
     ]
+  },
+  {
+    path: '/6',
+    name: '排班',
+    icon: 'el-icon-date',
+    hidden: false,
+    roles: ['user', 'manager', 'master'],
+    component: () => import('@/layout'),
+    children: [
+      {
+        path: '/myshift',
+        name: '查看排班',
+        icon: 'el-icon-files',
+        hidden: false,
+        roles: ['user'],
+        component: () => import('@/views/MyShift')
+      }
+    ]
   }
 ]
 
