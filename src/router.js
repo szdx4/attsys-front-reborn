@@ -69,6 +69,24 @@ const routes = [
         component: () => import('@/views/User')
       }
     ]
+  },
+  {
+    path: '/4',
+    name: '签到',
+    icon: 'el-icon-check',
+    hidden: false,
+    roles: ['user', 'manager', 'master'],
+    component: () => import('@/layout'),
+    children: [
+      {
+        path: '/sign',
+        name: '人脸签到',
+        icon: 'el-icon-success',
+        hidden: false,
+        roles: ['manager', 'master'],
+        component: () => import('@/views/Sign')
+      }
+    ]
   }
 ]
 
