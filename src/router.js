@@ -193,6 +193,24 @@ const routes = [
         component: () => import('@/views/Face')
       }
     ]
+  },
+  {
+    path: '/10',
+    name: '信息',
+    icon: 'el-icon-receiving',
+    hidden: false,
+    roles: ['user', 'manager', 'master'],
+    component: () => import('@/layout'),
+    children: [
+      {
+        path: '/message',
+        name: '我收到的信息',
+        icon: 'el-icon-star-on',
+        hidden: false,
+        roles: ['user', 'manager', 'master'],
+        component: () => import('@/views/Message')
+      }
+    ]
   }
 ]
 

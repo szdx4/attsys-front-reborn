@@ -8,7 +8,9 @@
         <el-dropdown trigger="hover">
           <span class="el-dropdown-link username">{{ user.name }}</span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>我的信息</el-dropdown-item>
+            <el-dropdown-item @click.native="changePassword"
+              >修改密码</el-dropdown-item
+            >
             <el-dropdown-item divided @click.native="logout"
               >退出登录</el-dropdown-item
             >
@@ -58,6 +60,9 @@ export default {
       localStorage.setItem('token', '')
       this.$router.push({ path: '/login' })
       this.$router.go(0)
+    },
+    changePassword () {
+      alert('change password')
     }
   },
   computed: {
