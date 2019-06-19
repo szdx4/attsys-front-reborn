@@ -43,3 +43,10 @@ export function userBatch (data) {
     batch: data
   })
 }
+
+export function changePassword (id, oldPwd, newPwd) {
+  return request('put', '/user/' + id + '/password', {
+    old_password: oldPwd,
+    new_password: newPwd
+  })
+}

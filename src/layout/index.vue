@@ -8,7 +8,7 @@
         <el-dropdown trigger="hover">
           <span class="el-dropdown-link username">{{ user.name }}</span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="changePassword"
+            <el-dropdown-item @click.native="changePasswordVisible = true"
               >修改密码</el-dropdown-item
             >
             <el-dropdown-item divided @click.native="logout"
@@ -43,12 +43,38 @@
         </div>
       </section>
     </el-col>
+
+    <el-dialog
+      title="修改密码"
+      :visible.sync="changePasswordVisible"
+      width="30%"
+      center
+    >
+      <el-form :model="passwordForm" ref="passwordForm">
+        <el-form-item label="原密码" label-width="64px">
+          <el-input type="password" v-model="passwordForm.oldPwd"></el-input>
+        </el-form-item>
+        <el-form-item label="新密码" label-width="64px">
+          <el-input type="password" v-model="passwordForm.newPwd"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="changePasswordVisible = false">取消</el-button>
+        <el-button
+          type="primary"
+          @click="changePassword"
+          :loading="changePasswordLoading"
+          >提交</el-button
+        >
+      </span>
+    </el-dialog>
   </el-row>
 </template>
 
 <script>
 import sidebar from './sidebar'
 import { isLogin } from '@/utils/user'
+import { changePassword } from '@/requests/user'
 
 export default {
   name: 'layout',
@@ -62,7 +88,25 @@ export default {
       this.$router.go(0)
     },
     changePassword () {
-      alert('change password')
+      this.changePasswordLoading = true
+      changePassword(this.$store.getters.user.id, this.passwordForm.oldPwd, this.passwordForm.newPwd).then(res => {
+        this.changePasswordLoading = false
+        this.$notify({
+          title: '提示',
+          message: '修改密码成功，请重新登录',
+          type: 'success'
+        })
+        setTimeout(() => {
+          this.logout()
+        }, 3000)
+      }).catch(err => {
+        this.changePasswordLoading = false
+        console.log(err)
+        this.$notify.error({
+          title: '提示',
+          message: '修改密码失败'
+        })
+      })
     }
   },
   computed: {
@@ -73,6 +117,16 @@ export default {
   created () {
     if (!isLogin()) {
       this.$router.push({ path: '/login' })
+    }
+  },
+  data () {
+    return {
+      changePasswordLoading: false,
+      changePasswordVisible: false,
+      passwordForm: {
+        oldPwd: '',
+        newPwd: ''
+      }
     }
   }
 }
